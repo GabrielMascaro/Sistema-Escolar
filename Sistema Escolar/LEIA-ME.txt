@@ -1,0 +1,32 @@
+SISTEMA ESCOLAR - PACOTE PARA VERCEL
+
+1) Envie/substitua os arquivos deste pacote no repositório GitHub conectado ao Vercel.
+2) No Vercel > Settings > Environment Variables, configure:
+   SUPABASE_URL = https://SEU-PROJETO.supabase.co (sem /rest/v1/)
+   SUPABASE_ANON_KEY = chave pública/anon (sb_publishable_ também pode ser usada)
+   SUPABASE_SERVICE_ROLE_KEY = chave secreta service_role (somente no Vercel; nunca no navegador/GitHub)
+   STUDENT_EMAIL_DOMAIN = alunos.sistema-escolar.com
+3) Faça novo Deploy (ou aguarde o deploy automático do GitHub).
+4) Entre com a conta admin que já existe no Supabase.
+
+ESTRUTURA ESPERADA
+Este pacote usa as tabelas public.perfis, turmas, disciplinas, professor_turmas,
+matriculas e notas, conforme o SQL já montado anteriormente. A tabela perfis
+precisa ter id, nome, tipo e matricula. IDs de turmas/disciplinas/matriculas
+são numéricos. A tabela notas precisa ter unique(matricula_id,disciplina_id,bimestre).
+
+TELAS
+- Administrador: cadastrar professor/aluno, turmas, disciplinas, matrículas,
+  atribuir professor, consultar notas.
+- Professor: lançar notas por turma, disciplina e bimestre.
+- Aluno: consultar boletim e média parcial.
+
+IMPORTANTE
+- Não cole a service_role key no código, no GitHub ou no chat.
+- As políticas RLS do Supabase precisam estar ativas e permitir as operações
+  conforme o SQL de configuração do projeto.
+- Este pacote é uma versão inicial integrada ao esquema informado. Não foi
+  possível testar contra o banco remoto da sua conta; após publicar, faça os
+  testes de login e cadastro. Se surgir erro, envie apenas a mensagem de erro,
+  nunca as chaves.
+- A média exibida é parcial: considera somente bimestres que já têm nota.

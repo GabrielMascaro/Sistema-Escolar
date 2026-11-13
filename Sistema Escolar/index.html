@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Sistema Escolar</title><link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <main class="container">
+    <header><h1>Sistema Escolar</h1><p>Boletim e gestão de notas</p></header>
+    <section id="login" class="panel">
+      <h2>Entrar</h2>
+      <form id="loginForm">
+        <label>E-mail ou matrícula<input id="identificador" autocomplete="username" required></label>
+        <label>Senha<input id="senha" type="password" autocomplete="current-password" required></label>
+        <button>Entrar</button>
+      </form><p id="loginMsg" class="msg"></p>
+    </section>
+    <section id="app" hidden>
+      <nav><span id="who"></span><button id="logout" class="secondary">Sair</button></nav>
+      <div id="admin" hidden>
+        <h2>Painel do administrador</h2>
+        <div class="tabs">
+          <button data-tab="usuarios">Usuários</button><button data-tab="turmas">Turmas</button>
+          <button data-tab="disciplinas">Disciplinas</button><button data-tab="matriculas">Matrículas</button>
+          <button data-tab="atribuicoes">Atribuir professor</button><button data-tab="boletins">Boletins</button>
+        </div>
+        <section id="tab-usuarios" class="panel tab">
+          <h3>Cadastrar professor ou aluno</h3>
+          <form id="userForm" class="grid">
+            <label>Nome<input name="nome" required></label><label>Tipo<select name="tipo"><option value="professor">Professor</option><option value="aluno">Aluno</option></select></label>
+            <label>E-mail (professor) / matrícula (aluno)<input name="identificador" required></label><label>Senha inicial<input name="senha" type="password" minlength="6" required></label>
+            <button>Cadastrar usuário</button>
+          </form><p id="userMsg" class="msg"></p><div id="usersList"></div>
+        </section>
+        <section id="tab-turmas" class="panel tab" hidden><h3>Nova turma</h3><form id="classForm" class="inline"><input name="nome" placeholder="Ex.: 1º A" required><input name="ano_letivo" type="number" value="2026" required><button>Criar turma</button></form><div id="classesList"></div></section>
+        <section id="tab-disciplinas" class="panel tab" hidden><h3>Nova disciplina</h3><form id="subjectForm" class="inline"><input name="nome" placeholder="Nome da disciplina" required><button>Criar disciplina</button></form><div id="subjectsList"></div></section>
+        <section id="tab-matriculas" class="panel tab" hidden><h3>Matricular aluno em turma</h3><form id="enrollForm" class="inline"><select name="aluno_id" id="enrollStudent" required></select><select name="turma_id" id="enrollClass" required></select><button>Matricular</button></form><div id="enrollList"></div></section>
+        <section id="tab-atribuicoes" class="panel tab" hidden><h3>Vincular professor à turma e disciplina</h3><form id="assignForm" class="inline"><select name="professor_id" id="assignTeacher" required></select><select name="turma_id" id="assignClass" required></select><select name="disciplina_id" id="assignSubject" required></select><button>Atribuir</button></form><div id="assignList"></div></section>
+        <section id="tab-boletins" class="panel tab" hidden><h3>Consultar notas</h3><div id="allGrades"></div></section>
+      </div>
+      <div id="teacher" hidden><h2>Painel do professor</h2><section class="panel"><form id="gradeForm" class="grid">
+        <label>Turma<select id="gradeClass" required></select></label><label>Disciplina<select id="gradeSubject" required></select></label>
+        <label>Bimestre<select id="gradeTerm"><option>1</option><option>2</option><option>3</option><option>4</option></select></label>
+        <div id="gradeStudents"></div><button>Salvar notas</button>
+      </form><p id="gradeMsg" class="msg"></p></section></div>
+      <div id="student" hidden><h2>Meu boletim</h2><div id="myReport"></div></div>
+    </section>
+  </main>
+  <script type="module" src="/js/app.js"></script>
+</body></html>
